@@ -81,3 +81,11 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+.cl-formButtonPrimary {
+  @apply bg-brand text-black;
+}
+
+.cl-formButtonPrimary:hover {
+  @apply bg-brand/80 text-black;
+}

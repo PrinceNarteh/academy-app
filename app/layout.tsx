@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../styles/globals.css";
 import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const poppins = localFont({
   src: [
@@ -39,8 +40,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("font-poppins", poppins.className)}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={cn("font-poppins", poppins.className)}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
