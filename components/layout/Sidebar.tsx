@@ -13,7 +13,7 @@ const links = [
   },
   {
     label: "Performance",
-    path: "/intructor/performance",
+    path: "/instructor/performance",
     icon: <BarChart4 />,
   },
 ];
