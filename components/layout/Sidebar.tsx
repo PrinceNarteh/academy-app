@@ -27,7 +27,7 @@ const Sidebar = () => {
         <Link
           href={link.path}
           key={link.path}
-          className={`flex items-center gap-4 p-3 rounded-lg hover:bg-brand/90 ${pathname.startsWith(link.path) && "bg-brand hover:bg-brand"}`}
+          className={`flex items-center gap-4 p-3 rounded-lg hover:bg-brand/20 ${pathname.startsWith(link.path) && "bg-brand hover:bg-brand/20"}`}
         >
           {link.icon} {link.label}
         </Link>

@@ -4,7 +4,7 @@ import React from "react";
 
 const Courses = () => {
   return (
-    <div className="px-6 py-4">
+    <div className="">
       <Link href="/instructor/create-course">
         <Button>Create New Course</Button>
       </Link>

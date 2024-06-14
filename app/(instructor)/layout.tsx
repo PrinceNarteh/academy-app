@@ -20,7 +20,7 @@ const InstructorLayout = ({ children }: InstructorLayoutProps) => {
       <Topbar />
       <div className="flex-1 flex">
         <Sidebar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 px-6 py-4">{children}</div>
       </div>
     </div>
   );
