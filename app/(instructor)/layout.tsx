@@ -1,6 +1,6 @@
+import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import { auth } from "@clerk/nextjs/server";
-import { Sidebar } from "lucide-react";
 import { redirect } from "next/navigation";
 import React from "react";
 
