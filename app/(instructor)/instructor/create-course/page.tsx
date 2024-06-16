@@ -1,7 +1,12 @@
+import CreateCourseForm from "@/components/courses/CreateCourseForm";
 import React from "react";
 
 const CreateCourse = () => {
-  return <div>CreateCourse</div>;
+  return (
+    <div>
+      <CreateCourseForm />
+    </div>
+  );
 };
 
 export default CreateCourse;
