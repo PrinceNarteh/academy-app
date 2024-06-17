@@ -22,7 +22,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="max-sm:hidden flex flex-col w-64 border-r shadow-md px-3 my-4 gap-4 text-sm font-medium">
+    <div className="max-sm:hidden min-h-[calc(100vh_-_120px)] flex flex-col w-64 border-r shadow-md px-3 py-4 gap-4 text-sm font-medium">
       {links.map((link) => (
         <Link
           href={link.path}

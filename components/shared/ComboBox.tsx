@@ -17,15 +17,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { CommandList } from "cmdk";
 
 interface ComboBoxProps {
+  value?: string;
   label?: string;
   options: { label: string; value: string }[];
+  onChange: (value: string) => void;
 }
 
-export function ComboBox({ options, label = "options" }: ComboBoxProps) {
+export function ComboBox({
+  options,
+  value,
+  label = "options",
+  onChange,
+}: ComboBoxProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -34,37 +41,53 @@ export function ComboBox({ options, label = "options" }: ComboBoxProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[400px] justify-between text-gray-800"
         >
           {value
-            ? options.find((option) => option.value === value)?.label
+            ? options.find((option) => option.label === value)?.label
             : `Select ${label}...`}
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
-        <Command>
+        <Command
+        // filter={(value, search) => {
+        //   const sanitizedSearch = search.replace(
+        //     /[-\/\\^$*+?.()|[\]{}]/g,
+        //     "\\$&",
+        //   );
+        //
+        //   const searchRegex = new RegExp(sanitizedSearch, "i");
+        //
+        //   const platformLabel =
+        //     options.find((option) => option.value === value)?.label || "";
+        //
+        //   return searchRegex.test(platformLabel) ? 1 : 0;
+        // }}
+        >
           <CommandInput placeholder={`Search ${label}...`} />
           <CommandEmpty>{`No ${label} found.`}</CommandEmpty>
           <CommandGroup>
-            {options.map((option) => (
-              <CommandItem
-                key={option.value}
-                value={option.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
-                  setOpen(false);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 size-4",
-                    value === option.value ? "opacity-100" : "opacity-0",
-                  )}
-                />
-                {option.label}
-              </CommandItem>
-            ))}
+            <CommandList>
+              {options.map((option) => (
+                <CommandItem
+                  key={option.value}
+                  value={option.value}
+                  onSelect={() => {
+                    onChange(option.value === value ? "" : option.value);
+                    setOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 size-4",
+                      value === option.value ? "opacity-100" : "opacity-0",
+                    )}
+                  />
+                  {option.label}
+                </CommandItem>
+              ))}
+            </CommandList>
           </CommandGroup>
         </Command>
       </PopoverContent>

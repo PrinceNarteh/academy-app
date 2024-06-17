@@ -12,6 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ComboBox } from "@/components/shared/ComboBox";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   title: z
@@ -28,13 +30,21 @@ const defaultValues = {
   subCategoryId: "",
 };
 
-const CreateCourseForm = () => {
+interface CreateCourseFormProps {
+  categories: {
+    label: string; // name of category
+    value: string; // categoryId
+    subCategories: { label: string; value: string }[];
+  }[];
+}
+
+const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
   const form = useForm<FormType>({
     defaultValues,
     resolver: zodResolver(formSchema),
   });
 
-  const handleSubmit: SubmitHandler<FormType> = (data) => {};
+  const handleSubmit: SubmitHandler<FormType> = (data) => { };
 
   return (
     <div>
@@ -46,7 +56,10 @@ const CreateCourseForm = () => {
         You can change them later
       </p>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-5">
+        <form
+          onSubmit={form.handleSubmit(handleSubmit)}
+          className="mt-5 space-y-5"
+        >
           <FormField
             control={form.control}
             name="title"
@@ -54,12 +67,48 @@ const CreateCourseForm = () => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input placeholder="Eg: Web Development For Beginners" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="categoryId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="block">Category</FormLabel>
+                <FormControl>
+                  <ComboBox label="category" options={categories} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="subCategoryId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="block">Category</FormLabel>
+                <FormControl>
+                  <ComboBox
+                    label="sub category"
+                    options={
+                      categories.find(
+                        (category) =>
+                          category.value === form.watch("categoryId"),
+                      )?.subCategories || []
+                    }
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button>Submit</Button>
         </form>
       </Form>
     </div>
