@@ -44,7 +44,9 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
     resolver: zodResolver(formSchema),
   });
 
-  const handleSubmit: SubmitHandler<FormType> = (data) => { };
+  const handleSubmit: SubmitHandler<FormType> = (data) => {};
+
+  console.log(form.getValues());
 
   return (
     <div>
@@ -58,7 +60,7 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="mt-5 space-y-5"
+          className="mt-5 space-y-5 max-w-lg mx-auto"
         >
           <FormField
             control={form.control}
@@ -67,7 +69,10 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Eg: Web Development For Beginners" {...field} />
+                  <Input
+                    placeholder="Eg: Web Development For Beginners"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

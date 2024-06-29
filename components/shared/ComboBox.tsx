@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
@@ -41,30 +39,14 @@ export function ComboBox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[400px] justify-between text-gray-800"
+          className="w-full justify-between text-gray-800"
         >
-          {value
-            ? options.find((option) => option.label === value)?.label
-            : `Select ${label}...`}
+          {value ? "value selected" : `Select ${label}...`}
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command
-        // filter={(value, search) => {
-        //   const sanitizedSearch = search.replace(
-        //     /[-\/\\^$*+?.()|[\]{}]/g,
-        //     "\\$&",
-        //   );
-        //
-        //   const searchRegex = new RegExp(sanitizedSearch, "i");
-        //
-        //   const platformLabel =
-        //     options.find((option) => option.value === value)?.label || "";
-        //
-        //   return searchRegex.test(platformLabel) ? 1 : 0;
-        // }}
-        >
+      <PopoverContent className="p-0">
+        <Command className="w-full bg-white">
           <CommandInput placeholder={`Search ${label}...`} />
           <CommandEmpty>{`No ${label} found.`}</CommandEmpty>
           <CommandGroup>
@@ -73,8 +55,8 @@ export function ComboBox({
                 <CommandItem
                   key={option.value}
                   value={option.value}
-                  onSelect={() => {
-                    onChange(option.value === value ? "" : option.value);
+                  onSelect={(currentValue) => {
+                    onChange(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >

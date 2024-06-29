@@ -27,14 +27,14 @@ const Topbar = () => {
         <Image src="/logo.png" height={100} width={200} alt="logo" />
       </Link>
 
-      <div className="max-md:hidden w-[400px] rounded-full flex">
+      <div className="max-md:hidden w-[400px] rounded-full flex border border-primary">
         <input
           type="text"
           className="flex-grow bg-[#fff8eb] rounded-l-full border-none text-sm pl-4 py-3"
           placeholder="Search for courses"
         />
-        <button className="bg-brand rounded-r-full border-none cursor-pointer px-4 py-3 hover:bg-brand/80">
-          <Search className="size-4" />
+        <button className="bg-primary rounded-r-full border-none cursor-pointer px-4 py-3 hover:bg-brand/80">
+          <Search className="size-4 text-white" />
         </button>
       </div>
 

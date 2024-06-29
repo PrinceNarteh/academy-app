@@ -5,7 +5,7 @@ import React from "react";
 const Courses = () => {
   return (
     <div className="">
-      <Link href="/instructor/create-course">
+      <Link href="/instructor/courses/create-course">
         <Button>Create New Course</Button>
       </Link>
     </div>
