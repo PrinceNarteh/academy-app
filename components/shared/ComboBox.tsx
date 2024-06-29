@@ -41,7 +41,9 @@ export function ComboBox({
           aria-expanded={open}
           className="w-full justify-between text-gray-800"
         >
-          {value ? "value selected" : `Select ${label}...`}
+          {value
+            ? options.find((option) => option.label === value)?.label
+            : `Select ${label}...`}
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

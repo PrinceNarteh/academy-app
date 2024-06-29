@@ -46,8 +46,6 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
 
   const handleSubmit: SubmitHandler<FormType> = (data) => {};
 
-  console.log(form.getValues());
-
   return (
     <div>
       <h1 className="text-xl font-bold">
