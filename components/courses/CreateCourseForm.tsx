@@ -16,6 +16,7 @@ import { ComboBox } from "@/components/shared/ComboBox";
 import { Button } from "@/components/ui/button";
 import { createCourseSchema } from "@/utils/validationSchemas";
 import { createCourse } from "@/actions/courses.action";
+import InputField from "../shared/InputField";
 
 type FormType = z.infer<typeof createCourseSchema>;
 const defaultValues = {
@@ -57,21 +58,10 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
           onSubmit={form.handleSubmit(handleSubmit)}
           className="mt-5 space-y-5 max-w-lg mx-auto"
         >
-          <FormField
-            control={form.control}
+          <InputField
+            label="Title"
             name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Eg: Web Development For Beginners"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            placeholder="Eg: Web Development for Beginners"
           />
           <FormField
             control={form.control}

@@ -17,6 +17,7 @@ export async function createCourse(
       errors: res.error.flatten().fieldErrors,
     };
   }
+  console.log(res);
 
   if (res.success) {
     await db.course.create({ data: { ...res.data } });
