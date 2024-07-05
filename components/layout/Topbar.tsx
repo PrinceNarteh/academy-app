@@ -1,6 +1,5 @@
 "use client";
 
-import { UserButton, useAuth } from "@clerk/nextjs";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,8 +18,6 @@ const topLinks = [
 ];
 
 const Topbar = () => {
-  const { isSignedIn } = useAuth();
-
   return (
     <nav className="flex justify-between items-center p-4">
       <Link href="">
@@ -50,13 +47,6 @@ const Topbar = () => {
             </Link>
           ))}
         </div>
-        {isSignedIn ? (
-          <UserButton afterSignOutUrl="/sign-in" />
-        ) : (
-          <Link href="/sign-in">
-            <Button className="">Sign In</Button>
-          </Link>
-        )}
       </div>
     </nav>
   );

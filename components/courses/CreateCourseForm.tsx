@@ -11,11 +11,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { ComboBox } from "@/components/shared/ComboBox";
 import { Button } from "@/components/ui/button";
 import { createCourseSchema } from "@/utils/validationSchemas";
-import { createCourse } from "@/actions/courses.action";
 import InputField from "../shared/InputField";
 
 type FormType = z.infer<typeof createCourseSchema>;
@@ -38,6 +36,10 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
     defaultValues,
     resolver: zodResolver(createCourseSchema),
   });
+
+  const handleSubmit: SubmitHandler<FormType> = (data) => {
+    console.log(data);
+  };
 
   return (
     <div>

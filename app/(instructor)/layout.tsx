@@ -1,7 +1,5 @@
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import React from "react";
 
 interface InstructorLayoutProps {
@@ -9,12 +7,6 @@ interface InstructorLayoutProps {
 }
 
 const InstructorLayout = ({ children }: InstructorLayoutProps) => {
-  const { userId } = auth();
-
-  if (!userId) {
-    return redirect("/sign-in");
-  }
-
   return (
     <div className="h-full flex flex-col">
       <Topbar />
