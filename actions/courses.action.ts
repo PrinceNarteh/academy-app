@@ -1,16 +1,15 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { ReturnType } from "@/types";
 import { createCourseSchema } from "@/utils/validationSchemas";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 
-export async function createCourse(
-  formData: z.infer<typeof createCourseSchema>,
-) {
+export async function createCourse(prevState: ReturnType, formData: FormData) {
   const { userId } = auth();
   if (!userId) return { message: "Unauthorized" };
-  const res = createCourseSchema.safeParse(formData);
+  const data = Object.fromEntries(formData);
+  const res = createCourseSchema.safeParse(data);
   if (res.error) {
     return {
       message: "Error creating course",
@@ -20,7 +19,10 @@ export async function createCourse(
   console.log(res);
 
   if (res.success) {
-    await db.course.create({ data: { ...res.data } });
-    return { message: "Course created successfully" };
+    const res = await db.course.create({ data: { ...res.data } });
+    return {
+      message: "Course created successfully",
+      data: res,
+    };
   }
 }

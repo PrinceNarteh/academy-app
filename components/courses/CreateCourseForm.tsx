@@ -39,11 +39,6 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
     resolver: zodResolver(createCourseSchema),
   });
 
-  const handleSubmit: SubmitHandler<FormType> = async (data) => {
-    const res = await createCourse(data);
-    console.log(res);
-  };
-
   return (
     <div>
       <h1 className="text-xl font-bold">
