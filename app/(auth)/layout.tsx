@@ -9,7 +9,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="">
       <Topbar />
-      {children}
+      <div className="min-h-[calc(100dvh_-_91px)] flex flex-col justify-center">
+        {children}
+      </div>
     </div>
   );
 };

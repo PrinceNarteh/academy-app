@@ -4,7 +4,6 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Button } from "@/components/ui/button";
 
 const topLinks = [
   {
@@ -19,7 +18,7 @@ const topLinks = [
 
 const Topbar = () => {
   return (
-    <nav className="flex justify-between items-center p-4">
+    <nav className="flex justify-between items-center p-4 shadow shadow-primary/30">
       <Link href="">
         <Image src="/logo.png" height={100} width={200} alt="logo" />
       </Link>
