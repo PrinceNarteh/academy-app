@@ -24,8 +24,8 @@ const InputField = ({ label, name, ...props }: InputFieldProps) => {
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem>
-          {label && <FormLabel>Title</FormLabel>}
+        <FormItem className="w-full">
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input {...field} {...props} />
           </FormControl>

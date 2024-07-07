@@ -1,3 +1,4 @@
+import Topbar from "@/components/layout/Topbar";
 import React from "react";
 
 interface AuthLayoutProps {
@@ -6,7 +7,8 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-5">
+    <div className="">
+      <Topbar />
       {children}
     </div>
   );

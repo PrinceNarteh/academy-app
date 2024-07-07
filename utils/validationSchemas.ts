@@ -11,3 +11,14 @@ export const createCourseSchema = z.object({
     message: "Sub Category is required",
   }),
 });
+
+export const registerUserSchema = z.object({
+  firstName: z.string().trim().min(1, { message: "First name is required." }),
+  lastName: z.string().trim().min(1, { message: "Last name is required." }),
+  email: z.string().trim().email(),
+  password: z.string().trim().min(6, {
+    message:
+      "Password too short. Password should have a minimum of six(6) characters.",
+  }),
+  role: z.string().trim().min(1, { message: "Role is required." }),
+});

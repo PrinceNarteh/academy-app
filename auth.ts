@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { compare } from "bcrypt";
+import * as bcrypt from "bcryptjs";
 
 import { db } from "./lib/db";
 
@@ -23,7 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           password: string;
         };
         let user = await db.user.findUnique({ where: { email } });
-        if (!user || !(await compare(password, user.password))) {
+        if (!user || !(await bcrypt.compare(password, user.password))) {
           throw new Error("Invalid credentials");
         }
         return user;
