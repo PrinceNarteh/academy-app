@@ -11,10 +11,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { registerUser } from "@/actions/users.action";
+import { useRef } from "react";
 
 type FormType = z.infer<typeof registerUserSchema>;
 const defaultValues: FormType = {
@@ -26,10 +27,13 @@ const defaultValues: FormType = {
 };
 
 const RegisterForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<FormType>({
     defaultValues,
     resolver: zodResolver(registerUserSchema),
   });
+  console.log(formRef);
+
   return (
     <Card className="max-w-xl w-full mx-auto p-5">
       <CardHeader>
@@ -40,26 +44,29 @@ const RegisterForm = () => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form className="space-y-4">
+          <form
+            ref={formRef}
+            action={registerUser}
+            onSubmit={form.handleSubmit(() => formRef?.current?.submit())}
+            className="space-y-4"
+          >
             <div className="flex gap-5">
               <InputField name="firstName" label="First Name" />
               <InputField name="lastName" label="Last Name" />
             </div>
             <InputField name="email" label="Email" type="email" />
-            <div className="flex gap-5">
-              <InputField name="password" label="Password" type="password" />
-              <InputField
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-              />
+            <InputField name="password" label="Password" type="password" />
+            <InputField
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+            />
+            <div className="flex justify-end">
+              <Button type="submit">Register</Button>
             </div>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button>Register</Button>
-      </CardFooter>
     </Card>
   );
 };
