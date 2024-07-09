@@ -22,3 +22,11 @@ export const registerUserSchema = z.object({
   }),
   role: z.string().trim().min(1, { message: "Role is required." }),
 });
+
+export const loginUserSchema = z.object({
+  email: z.string().trim().email(),
+  password: z.string().trim().min(6, {
+    message:
+      "Password too short. Password should have a minimum of six(6) characters.",
+  }),
+});

@@ -2,7 +2,7 @@
 
 import { registerUserSchema } from "@/utils/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -14,8 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { registerUser } from "@/actions/users.action";
-import { useRef } from "react";
+import { registerUser } from "@/actions/auth.action";
 
 type FormType = z.infer<typeof registerUserSchema>;
 const defaultValues: FormType = {
@@ -27,11 +26,15 @@ const defaultValues: FormType = {
 };
 
 const RegisterForm = () => {
-  const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<FormType>({
     defaultValues,
     resolver: zodResolver(registerUserSchema),
   });
+
+  const submitHandler: SubmitHandler<FormType> = async (data) => {
+    const res = await registerUser(data);
+    console.log(res);
+  };
 
   return (
     <Card className="max-w-xl w-full mx-auto p-1">
@@ -44,9 +47,7 @@ const RegisterForm = () => {
       <CardContent>
         <Form {...form}>
           <form
-            ref={formRef}
-            action={registerUser}
-            onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+            onSubmit={form.handleSubmit(submitHandler)}
             className="space-y-4"
           >
             <div className="flex gap-5">
