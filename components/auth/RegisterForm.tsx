@@ -32,10 +32,9 @@ const RegisterForm = () => {
     defaultValues,
     resolver: zodResolver(registerUserSchema),
   });
-  console.log(formRef);
 
   return (
-    <Card className="max-w-xl w-full mx-auto p-5">
+    <Card className="max-w-xl w-full mx-auto p-1">
       <CardHeader>
         <CardTitle>Register Form</CardTitle>
         <CardDescription>
@@ -47,7 +46,7 @@ const RegisterForm = () => {
           <form
             ref={formRef}
             action={registerUser}
-            onSubmit={form.handleSubmit(() => formRef?.current?.submit())}
+            onSubmit={form.handleSubmit(() => formRef.current?.submit())}
             className="space-y-4"
           >
             <div className="flex gap-5">

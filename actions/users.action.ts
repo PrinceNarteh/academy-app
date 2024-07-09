@@ -7,6 +7,7 @@ import { roleStringToEnum } from "@/utils/convert-enum";
 
 export async function registerUser(formData: FormData) {
   const data = Object.fromEntries(formData);
+  console.log(data);
   const res = await registerUserSchema.safeParseAsync(data);
 
   if (!res.success) {
